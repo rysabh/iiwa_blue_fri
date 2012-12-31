@@ -11,7 +11,7 @@
                     <measurementTranslation calculationError="2.5437062428592996" method="XYZ4Point" timestamp="1726091843831"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="17.6135666413569" cogY="15.97690334233327" cogZ="-5.353474477395828" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.2097557721827037"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="52.09751724628533" cogY="14.464849033081215" cogZ="246.47240934560818" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.2097557721827037"/>
         </toolTemplate>
         <toolTemplate class="" name="RobotiqSep11">
             <frames>
