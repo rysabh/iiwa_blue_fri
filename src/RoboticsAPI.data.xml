@@ -7,11 +7,11 @@
         <toolTemplate class="" name="RobotiqGripper">
             <frames>
                 <frame id="_7fd039f0-355f-47a2-a642-52cff888aa37" name="gripper_tcp">
-                    <transformation a="0.0" b="0.0" c="0.0" x="-0.21698483679345643" y="1.6258204965695362" z="170.47551296173597"/>
-                    <measurementTranslation calculationError="2.110913903442405" method="XYZ4Point" timestamp="1719963625189"/>
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.3135707955388224" y="0.734779543385665" z="171.51644633239823"/>
+                    <measurementTranslation calculationError="2.5437062428592996" method="XYZ4Point" timestamp="1726091843831"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-3.9302743251189485" cogY="-2.522042758801718" cogZ="-20.19108550574559" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.3917441935070936"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="17.6135666413569" cogY="15.97690334233327" cogZ="-5.353474477395828" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.2097557721827037"/>
         </toolTemplate>
         <toolTemplate class="" name="RobotiqSep11">
             <frames>
