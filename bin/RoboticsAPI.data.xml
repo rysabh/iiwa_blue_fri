@@ -24,11 +24,11 @@
         <toolTemplate class="" name="umiGripper">
             <frames>
                 <frame id="_6a04a3b2-a565-4395-bb0e-83d82b786ab5" name="umiGripper_TCP">
-                    <transformation a="0.0" b="0.0" c="0.0" x="0.3135707955388224" y="0.734779543385665" z="171.51644633239823"/>
-                    <measurementTranslation calculationError="2.5437062428592996" method="XYZ4Point" timestamp="1726091843831"/>
+                    <transformation a="0.0" b="0.0" c="0.0" x="68.84407404058989" y="-1.0047178707832758" z="350.6282413849162"/>
+                    <measurementTranslation calculationError="7.3113669883155135" method="XYZ4Point" timestamp="1357148531007"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="52.09751724628533" cogY="14.464849033081215" cogZ="246.47240934560818" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.2097557721827037"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="20.645705732998625" cogY="3.3704913838867228" cogZ="132.6052464253813" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.4685868277011247"/>
         </toolTemplate>
     </objectTemplates>
 </RoboticsAPIData>
