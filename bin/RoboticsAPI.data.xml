@@ -115,9 +115,9 @@
             </redundancyData>
         </frame>
         <frame id="_27be3344-7190-4f4e-84c8-17b65783ed09" name="P8">
-            <transformation a="2.2672282631351566" b="2.8686944619997667E-5" c="-3.1404249893568674" x="506.5370585872494" y="491.5060362547206" z="246.60180528966782"/>
+            <transformation a="2.2672476979066074" b="9.171446047466267E-5" c="-3.1402902336154406" x="573.4809637546246" y="117.63445651904368" z="246.47128236465198"/>
             <additionalInformation>
-                <info key="LastModificationTime" type="java.lang.Long" value="1357260037844"/>
+                <info key="LastModificationTime" type="java.lang.Long" value="1357263746634"/>
                 <info base="LBR_iiwa_7_R800_1" controller="KUKA_Sunrise_Cabinet_1" device="LBR_iiwa_7_R800_1" tcpName="four_suction_tool/pick_tcp" tool="four_suction_tool" type="com.kuka.roboticsAPI.deviceModel.TeachInformation">
                     <tcpTransformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="275.0"/>
                 </info>
@@ -126,7 +126,7 @@
                 <redundancy transformationProviderName="KUKA_Sunrise_Cabinet_1/LBR_iiwa_7_R800_1" type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy">
                     <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$StatusParameter" value="2" valueType="java.lang.Integer"/>
                     <info type="com.kuka.roboticsAPI.deviceModel.StatusTurnRedundancy$TurnParameter" value="12" valueType="java.lang.Integer"/>
-                    <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-0.22083798614889125" valueType="java.lang.Double"/>
+                    <info type="com.kuka.roboticsAPI.deviceModel.LBRE1Redundancy$E1Parameter" value="-0.2209111499148025" valueType="java.lang.Double"/>
                 </redundancy>
             </redundancyData>
         </frame>
@@ -164,7 +164,7 @@
                     <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="275.0"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-5.328617164391164" cogY="-15.86265269718752" cogZ="80.51810328985061" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.4875279644340504"/>
         </toolTemplate>
     </objectTemplates>
 </RoboticsAPIData>
