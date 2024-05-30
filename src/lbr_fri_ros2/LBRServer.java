@@ -126,7 +126,7 @@ public class LBRServer extends RoboticsAPIApplication {
         
         // try to connect
         try {
-        	fri_session_.await(10, TimeUnit.SECONDS);
+        	fri_session_.await(100, TimeUnit.SECONDS);
         } catch (final TimeoutException e) {
         	getLogger().error(e.getLocalizedMessage());
         	return;
