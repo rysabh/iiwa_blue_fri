@@ -100,6 +100,7 @@ public class LBRServer extends RoboticsAPIApplication {
 	public void configure_fri() {
 		fri_configuration_ = FRIConfiguration.createRemoteConfiguration(lbr_, client_name_);
 		fri_configuration_.setSendPeriodMilliSec(send_period_);
+		fri_configuration_.setPortOnRemote(30201);
 		
         getLogger().info("Creating FRI connection to " + fri_configuration_.getHostName());
         getLogger().info(
