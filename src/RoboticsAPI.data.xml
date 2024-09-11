@@ -11,7 +11,7 @@
                     <measurementTranslation calculationError="2.110913903442405" method="XYZ4Point" timestamp="1719963625189"/>
                 </frame>
             </frames>
-            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.40624164369745935" cogY="-0.780568881153137" cogZ="23.72991012970095" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.279748497929488"/>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-3.9302743251189485" cogY="-2.522042758801718" cogZ="-20.19108550574559" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.3917441935070936"/>
         </toolTemplate>
     </objectTemplates>
 </RoboticsAPIData>
