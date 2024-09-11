@@ -13,5 +13,13 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="-3.9302743251189485" cogY="-2.522042758801718" cogZ="-20.19108550574559" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.3917441935070936"/>
         </toolTemplate>
+        <toolTemplate class="" name="RobotiqSep11">
+            <frames>
+                <frame id="_b8bffb62-ce71-4cc9-b3db-404506dd77dc" name="gripper_tcp_sep11">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+                </frame>
+            </frames>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+        </toolTemplate>
     </objectTemplates>
 </RoboticsAPIData>
