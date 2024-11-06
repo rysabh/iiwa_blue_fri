@@ -1,176 +1,78 @@
 package lbr_fri_ros2;
 
-import static com.kuka.roboticsAPI.motionModel.BasicMotions.positionHold;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.Arrays;
-
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
+import com.kuka.roboticsAPI.applicationModel.tasks.RoboticsAPITask;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
-import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
-import com.kuka.roboticsAPI.motionModel.controlModeModel.*;
-import com.kuka.connectivity.fastRobotInterface.*;
+import static com.kuka.roboticsAPI.motionModel.HRCMotions.*;
+import com.kuka.roboticsAPI.sensorModel.DataRecorder;
+import com.kuka.roboticsAPI.sensorModel.DataRecorder.AngleUnit;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 public class LBRServer extends RoboticsAPIApplication {
-	// members
-	private LBR lbr_;
-	private Controller lbr_controller_;
 
-	// control mode
-	private enum CONTROL_MODE {
-		POSITION_CONTROL,
-		JOINT_IMPEDANCE_CONTROL,
-		CARTESIAN_IMPEDANCE_CONTROL;
-	}
+    private Controller kuka;
+    private LBR lbr;
+ 
 
-	// convert enum to string array, see https://stackoverflow.com/questions/13783295/getting-all-names-in-an-enum-as-a-string
-	public static String[] getNames(Class<? extends Enum<?>> e) {
-	    return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "").split(", ");
-	}
 
-	// FRI parameters 
-	private String client_name_;
-	private String[] client_names_ = {"192.168.10.150","192.168.10.151", "192.168.10.152", "192.170.10.121", "192.168.10.159"};
-	private int send_period_;	
-	private String[] send_periods_ = {"1", "2", "5", "10"};  // send period in ms
+    @Override
+    public void initialize() {
+        kuka = getController("KUKA_Sunrise_Cabinet_1");
+        lbr = (LBR) getDevice(kuka, "LBR_iiwa_7_R800_1");
+    }
 
-	private FRIConfiguration fri_configuration_;
-	private FRISession fri_session_;
-	private FRIJointOverlay fri_overlay_;
+    private DataRecorder initDataRecorder() {
+        // Set filename with timestamp
+        final String fmt = "yyyy-MM-dd_HH-mm-ss";
+        final String timestamp = new SimpleDateFormat(fmt).format(new Date());
+        final String fname = String.format("%s.log", timestamp);
 
-	private AbstractMotionControlMode control_mode_;
-	private String[] control_modes_ = getNames(CONTROL_MODE.class);
-	private ClientCommandMode command_mode_;
-	private String[] command_modes_ = getNames(ClientCommandMode.class);
-	
+        // Recorder intrinsic settings
+        final long timeout = 120; // seconds
+        final int sampleRate = 333; // ms
 
-	// methods
-	public void request_user_config() {
-		// send period
-		int id = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION, 
-				"Select the desired FRI send period [ms]:", 
-				send_periods_
-		);
-		send_period_ = Integer.valueOf(send_periods_[id]);
-		getLogger().info("Send period set to: " + send_period_);
-		
-		// remote IP address
-		id = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION,
-				"Select your remote IP address:",
-				client_names_
-		);
-		client_name_ = client_names_[id];
-		getLogger().info("Remote address set to: " + client_name_);
+        // Data recorder builder
+        DataRecorder recorder = new DataRecorder(fname, timeout, TimeUnit.SECONDS, sampleRate)
+                .addInternalJointTorque(lbr)
+                .addCartesianForce(lbr.getFlange(), null)
+                .addCartesianTorque(lbr.getFlange(), null)
+                .addCurrentJointPosition(lbr, AngleUnit.Degree);
+        recorder.enable();
+        return recorder;
+    }
 
-		// control mode
-		id = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION,
-				"Select the desired FRI control mode: ",
-				control_modes_				
-		);
+    @Override
+    public void run() {
+        // Create the data recorder object
+        final DataRecorder recorder = initDataRecorder();
+        recorder.startRecording();
 
-		CONTROL_MODE control_mode = CONTROL_MODE.values()[id];
-		switch (control_mode) {
-			case POSITION_CONTROL:
-				control_mode_ = new PositionControlMode();
-				break;
-			case JOINT_IMPEDANCE_CONTROL:
-				control_mode_ = new JointImpedanceControlMode(200, 200, 200, 200, 200, 200, 200);
-				break;
-			case CARTESIAN_IMPEDANCE_CONTROL:
-				control_mode_ = new CartesianImpedanceControlMode();
-				break;
-		}
-		getLogger().info("Control mode set to: " + control_mode.name());
-		
-		// command mode
-		id = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION,
-				"Select the desired FRI client command mode: ",
-				command_modes_				
-		);
-		command_mode_ = ClientCommandMode.values()[id];
-		getLogger().info("Client command mode set to: " + command_mode_.name());	
-	}
-	
-	public void configure_fri() {
-		fri_configuration_ = FRIConfiguration.createRemoteConfiguration(lbr_, client_name_);
-		fri_configuration_.setSendPeriodMilliSec(send_period_);
-		fri_configuration_.setPortOnRemote(30201);
-		
-        getLogger().info("Creating FRI connection to " + fri_configuration_.getHostName());
-        getLogger().info(
-			"SendPeriod: " + fri_configuration_.getSendPeriodMilliSec() + "ms |"
-	        + " ReceiveMultiplier: " + fri_configuration_.getReceiveMultiplier()
-        );
-        
-        fri_session_ = new FRISession(fri_configuration_);
-        fri_overlay_ = new FRIJointOverlay(fri_session_, command_mode_);
-        
-        fri_session_.addFRISessionListener(new IFRISessionListener() {
-	    	@Override
-	    	public void onFRISessionStateChanged(FRIChannelInformation friChannelInformation) {
-	    		getLogger().info("Session State change " + friChannelInformation.getFRISessionState().toString() );
-	    	}
-	
-	    	@Override
-	    	public void onFRIConnectionQualityChanged(FRIChannelInformation friChannelInformation) {
-		    	getLogger().info("Quality change signalled "+friChannelInformation.getQuality());
-		    	getLogger().info("Jitter "+friChannelInformation.getJitter());
-		    	getLogger().info("Latency "+friChannelInformation.getLatency());
-	    	}
-    	});        
-        
-        // try to connect
-        try {
-        	fri_session_.await(100, TimeUnit.SECONDS);
-        } catch (final TimeoutException e) {
-        	getLogger().error(e.getLocalizedMessage());
-        	return;
-        }
-        
-        getLogger().info("FRI connection established.");
-	}
-	
-	@Override
-	public void initialize() {
-        lbr_controller_ = (Controller) getContext().getControllers().toArray()[0];
-        lbr_ = (LBR) lbr_controller_.getDevices().toArray()[0];
-		
-        // set FRI parameters
-		request_user_config();
-		
-		// configure the FRI
-		configure_fri();
-	}
+        // Enable hand guiding
+        lbr.setESMState("1");
+        getLogger().info("Now HandGuiding");
+        lbr.move(handGuiding());
+        // Stop recording and wait for the file to be available
+        recorder.stopRecording();
+        recorder.awaitFileAvailable(3, TimeUnit.SECONDS);
 
-	@Override
-	public void run() {
-		// run the FRI
-		lbr_.move(positionHold(control_mode_, -1, TimeUnit.SECONDS).addMotionOverlay(fri_overlay_));			
-		return;
-	}
-	
-	@Override
-	public void dispose() {
-		// close connection
-		getLogger().info("Disposing FRI session.");
-		fri_session_.close();
+        // Log the filename for future reference
+        getLogger().info("Logged data filename: " + recorder.getFileName());
+    }
 
-		super.dispose();
-	}
-	
-	/**
-	 * main
-	 * 
-	 * @param args
-	 */
-	public static void main(final String[] args) {
-		LBRServer app = new LBRServer();
-		app.runApplication();
-	}
+    @Override
+    public void dispose() {
+        lbr.setESMState("1");
+        super.dispose();
+    }
+
+    public static void main(String[] args) {
+        LBRServer app = new LBRServer();
+        app.runApplication();
+    }
 }
