@@ -35,7 +35,7 @@ public class handGuidance extends RoboticsAPIApplication {
 
         // Recorder intrinsic settings
         final long timeout = 120; // seconds
-        final int sampleRate = 100; // ms
+        final int sampleRate = 50; // ms
 
         // Data recorder builder
         DataRecorder recorder = new DataRecorder(fname, timeout, TimeUnit.SECONDS, sampleRate)
