@@ -7,6 +7,9 @@ import com.kuka.roboticsAPI.deviceModel.LBR;
 import static com.kuka.roboticsAPI.motionModel.HRCMotions.*;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder.AngleUnit;
+import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
+import com.kuka.roboticsAPI.geometricModel.Tool;
+
 
 
 import java.text.SimpleDateFormat;
@@ -18,13 +21,18 @@ public class handGuidance extends RoboticsAPIApplication {
 
     private Controller kuka;
     private LBR lbr;
- 
+    private Tool tool;
+    private ObjectFrame tool_TCP;
 
 
     @Override
     public void initialize() {
         kuka = getController("KUKA_Sunrise_Cabinet_1");
         lbr = (LBR) getDevice(kuka, "LBR_iiwa_7_R800_1");
+        tool = getApplicationData().createFromTemplate("RobotiqGripper");
+        tool.attachTo(lbr.getFlange());
+        tool_TCP = tool.getFrame("/gripper_tcp");
+
     }
 
     private DataRecorder initDataRecorder() {
@@ -57,6 +65,8 @@ public class handGuidance extends RoboticsAPIApplication {
         lbr.setESMState("1");
         getLogger().info("Now HandGuiding");
         lbr.move(handGuiding());
+//        tool.move(handGuiding());
+//        tool_TCP.move(handGuiding());
         // Stop recording and wait for the file to be available
         recorder.stopRecording();
         recorder.awaitFileAvailable(3, TimeUnit.SECONDS);
