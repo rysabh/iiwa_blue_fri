@@ -21,5 +21,14 @@
             </frames>
             <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="0.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
         </toolTemplate>
+        <toolTemplate class="" name="umiGripper">
+            <frames>
+                <frame id="_6a04a3b2-a565-4395-bb0e-83d82b786ab5" name="umiGripper_TCP">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.3135707955388224" y="0.734779543385665" z="171.51644633239823"/>
+                    <measurementTranslation calculationError="2.5437062428592996" method="XYZ4Point" timestamp="1726091843831"/>
+                </frame>
+            </frames>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="52.09751724628533" cogY="14.464849033081215" cogZ="246.47240934560818" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="1.2097557721827037"/>
+        </toolTemplate>
     </objectTemplates>
 </RoboticsAPIData>
