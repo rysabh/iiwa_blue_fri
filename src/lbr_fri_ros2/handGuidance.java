@@ -29,9 +29,9 @@ public class handGuidance extends RoboticsAPIApplication {
     public void initialize() {
         kuka = getController("KUKA_Sunrise_Cabinet_1");
         lbr = (LBR) getDevice(kuka, "LBR_iiwa_7_R800_1");
-        tool = getApplicationData().createFromTemplate("RobotiqGripper");
+        tool = getApplicationData().createFromTemplate("umiGripper");
         tool.attachTo(lbr.getFlange());
-        tool_TCP = tool.getFrame("/gripper_tcp");
+        tool_TCP = tool.getFrame("/umiGripper_TCP");
 
     }
 
