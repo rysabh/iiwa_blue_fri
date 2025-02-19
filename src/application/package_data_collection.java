@@ -142,6 +142,33 @@ public class package_data_collection extends RoboticsAPIApplication {
 	private void performPick(){
 		System.out.println("Performing Pick");
 		
+		System.out.println("Moving to Pre-Pick");
+		try {
+            pick_tcp.move(ptp(getApplicationData().getFrame(pre_pick_location)).setJointVelocityRel(0.1));
+        } catch (Exception e) {
+            System.out.println("Could not move to pre-pick due to");
+            System.out.println(e.getMessage());
+        }
+		
+		
+		System.out.println("Moving to Pick");
+		try {
+            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.1));
+        } catch (Exception e) {
+            System.out.println("Could not move to pick due to");
+            System.out.println(e.getMessage());
+        }
+		
+		
+		System.out.println("Moving to Post-Pick");
+		try {
+            pick_tcp.move(ptp(getApplicationData().getFrame(post_pick_location)).setJointVelocityRel(0.1));
+        } catch (Exception e) {
+            System.out.println("Could not move to post-pick due to");
+            System.out.println(e.getMessage());
+        }
+		
+		
 		return;
 	}
 	
@@ -231,7 +258,7 @@ public class package_data_collection extends RoboticsAPIApplication {
         
         
         
-		while(exit_flag){
+		while(!exit_flag){
 			
 		}
 		
