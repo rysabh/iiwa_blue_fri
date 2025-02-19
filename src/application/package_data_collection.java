@@ -217,7 +217,9 @@ public class package_data_collection extends RoboticsAPIApplication {
         robot_control_bar.addUserKey(2, reset_event, true).setText(UserKeyAlignment.TopLeft, "Reset");
         robot_control_bar.addUserKey(3, exit_event, true).setText(UserKeyAlignment.TopLeft, "Exit");
         robot_control_bar.publish();
-		
+        suction_tool.attachTo(lBR_iiwa_7_R800_1.getFlange());
+        pick_tcp = suction_tool.getFrame("/pick_tcp");
+        
         System.out.println("Moving the Robot Home");
         try {
             pick_tcp.move(ptp(getApplicationData().getFrame(home)).setJointVelocityRel(0.1));
