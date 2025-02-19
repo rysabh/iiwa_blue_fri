@@ -103,7 +103,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		id = getApplicationUI().displayModalDialog(
 				ApplicationDialogType.QUESTION, 
 				"Select the Joint Rel Acc for the current trial:", 
-				PackageType
+				joint_rel_acc
 		);
 		CurrentJointRelAcc = Math.toRadians(Double.valueOf(joint_rel_acc[id]));
 		System.out.println("Joint Relative Acceleration set to: "+ String.valueOf(CurrentJointRelAcc));
