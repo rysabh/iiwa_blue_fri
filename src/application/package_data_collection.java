@@ -64,9 +64,11 @@ public class package_data_collection extends RoboticsAPIApplication {
     private double CurrentGoalOrientation = 0.0, CurrentJointRelVel = 0.1, CurrentJointRelAcc = 0.0;
     private int CurrentPackageType = 1;
     
-    private String home, pick_location, pre_pick_location, post_pick_location, nominal_place_location;
+    private String home, pick_location, pre_pick_location, post_pick_location;
     
+    private String start_lin_1, start_circ, mid_circ, start_lin_2, nominal_place_location;
     private Frame place_location;
+    
     private boolean exit_flag;
     
 	@Override
@@ -74,8 +76,17 @@ public class package_data_collection extends RoboticsAPIApplication {
 		// initialize your application here
 		home = "/P1";
 		pre_pick_location = "/P2";
-		post_pick_location = "/P3";
-		nominal_place_location = "/P4";
+		pick_location = "/P3";
+		post_pick_location = "/P4";
+		
+		
+		//Defining trajectory waypoints
+		start_lin_1 = "/P";
+		start_circ = "/P";
+		mid_circ = "/P";
+		start_lin_2 = "/P";
+		nominal_place_location = "/P";
+		
 		
 		exit_flag = false;
 		
@@ -153,7 +164,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		System.out.println("Moving to Pick");
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.1));
+            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.05));
         } catch (Exception e) {
             System.out.println("Could not move to pick due to");
             System.out.println(e.getMessage());
