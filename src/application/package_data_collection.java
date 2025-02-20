@@ -11,11 +11,15 @@ import javax.inject.Named;
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import static com.kuka.roboticsAPI.motionModel.BasicMotions.*;
 
+import com.kuka.roboticsAPI.conditionModel.ForceCondition;
+import com.kuka.roboticsAPI.conditionModel.ICondition;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.CartDOF;
 import com.kuka.roboticsAPI.geometricModel.Frame;
 import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.World;
+import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder.AngleUnit;
@@ -61,6 +65,7 @@ public class package_data_collection extends RoboticsAPIApplication {
     private String[] joint_rel_acc = {"0.0", "0.5", "0.9"};
     
     
+    private CartesianImpedanceControlMode impedanceControlmode;
     private double CurrentGoalOrientation = 0.0, CurrentJointRelVel = 0.1, CurrentJointRelAcc = 0.0;
     private int CurrentPackageType = 1;
     
@@ -81,14 +86,20 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		
 		//Defining trajectory waypoints
-		start_lin_1 = "/P";
-		start_circ = "/P";
-		mid_circ = "/P";
-		start_lin_2 = "/P";
-		nominal_place_location = "/P";
+		start_lin_1 = "/P4";
+		start_circ = "/P5";
+		mid_circ = "/P6";
+		start_lin_2 = "/P7";
+		nominal_place_location = "/P8";
 		
 		
 		exit_flag = false;
+		
+		impedanceControlmode = new CartesianImpedanceControlMode();
+		impedanceControlmode.parametrize(CartDOF.X,CartDOF.Y).setStiffness(1000);
+		impedanceControlmode.parametrize(CartDOF.Z).setStiffness(600);
+		impedanceControlmode.parametrize(CartDOF.ROT).setStiffness(100);
+		impedanceControlmode.parametrize(CartDOF.ALL).setDamping(0.7);
 		
 		
 	}
@@ -160,11 +171,10 @@ public class package_data_collection extends RoboticsAPIApplication {
             System.out.println("Could not move to pre-pick due to");
             System.out.println(e.getMessage());
         }
-		
-		
+		ForceCondition Cond_1 = ForceCondition.createNormalForceCondition(pick_tcp, CoordinateAxis.Z, 60.0);
 		System.out.println("Moving to Pick");
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.05));
+            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.05).setMode(impedanceControlmode).breakWhen(Cond_1));
         } catch (Exception e) {
             System.out.println("Could not move to pick due to");
             System.out.println(e.getMessage());
