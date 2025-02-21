@@ -293,6 +293,18 @@ public class package_data_collection extends RoboticsAPIApplication {
     
     private void reset(){
     	System.out.println("Performing Reset");
+    	
+    	System.out.println("Moving the Robot Home");
+        try {
+            pick_tcp.move(ptp(getApplicationData().getFrame(home)).setJointVelocityRel(0.1));
+        } catch (Exception e) {
+            System.out.println("Could not move to home due to");
+            System.out.println(e.getMessage());
+        }
+        
+        request_user_config();
+    	
+    	
     	return;
     }
     
