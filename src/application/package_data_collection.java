@@ -253,9 +253,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		System.out.println("Executing Spline Motion, and Placing the Package");
 		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
-		Transformation offset = Transformation.ofRad(0, 0, 0, 0, -CurrentGoalOrientation, 0);
-		goal_location.transform(offset);
-//		goal_location.setBetaRad(goal_location.getBetaRad()-CurrentGoalOrientation);
+		goal_location.setBetaRad(goal_location.getBetaRad()-CurrentGoalOrientation);
 		
 		
 		if(CurrentJointRelAcc != 0){
