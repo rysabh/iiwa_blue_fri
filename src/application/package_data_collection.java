@@ -20,6 +20,8 @@ import com.kuka.roboticsAPI.geometricModel.ObjectFrame;
 import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.geometricModel.World;
 import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
+import com.kuka.roboticsAPI.geometricModel.math.ITransformation;
+import com.kuka.roboticsAPI.geometricModel.math.Transformation;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder.AngleUnit;
@@ -251,8 +253,10 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		System.out.println("Executing Spline Motion, and Placing the Package");
 		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
-		goal_location.setBetaRad(goal_location.getBetaRad()-CurrentGoalOrientation);
-		goal_location.setGammaRad(goal_location.getGammaRad()+CurrentGoalOrientation);
+		Transformation offset = Transformation.ofRad(0, 0, 0, 0, -CurrentGoalOrientation, 0);
+		goal_location.transform(offset);
+//		goal_location.setBetaRad(goal_location.getBetaRad()-CurrentGoalOrientation);
+		
 		
 		if(CurrentJointRelAcc != 0){
 			try {
