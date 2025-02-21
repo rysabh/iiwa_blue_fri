@@ -119,7 +119,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 				"Select the Joint Rel Vel for the current trial:", 
 				joint_rel_vel
 		);
-		CurrentJointRelVel = Math.toRadians(Double.valueOf(joint_rel_vel[id]));
+		CurrentJointRelVel = Double.valueOf(joint_rel_vel[id]);
 		System.out.println("Joint Relative Velocity set to: "+ String.valueOf(CurrentJointRelVel));
 		
 		id = getApplicationUI().displayModalDialog(
@@ -127,7 +127,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 				"Select the Joint Rel Acc for the current trial:", 
 				joint_rel_acc
 		);
-		CurrentJointRelAcc = Math.toRadians(Double.valueOf(joint_rel_acc[id]));
+		CurrentJointRelAcc = Double.valueOf(joint_rel_acc[id]);
 		System.out.println("Joint Relative Acceleration set to: "+ String.valueOf(CurrentJointRelAcc));
 		
 		
@@ -174,7 +174,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		ForceCondition Cond_1 = ForceCondition.createNormalForceCondition(pick_tcp, CoordinateAxis.Z, 60.0);
 		System.out.println("Moving to Pick");
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.05).setMode(impedanceControlmode).breakWhen(Cond_1));
+            pick_tcp.move(ptp(getApplicationData().getFrame(pick_location)).setJointVelocityRel(0.01).setMode(impedanceControlmode).breakWhen(Cond_1));
         } catch (Exception e) {
             System.out.println("Could not move to pick due to");
             System.out.println(e.getMessage());
@@ -189,7 +189,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		System.out.println("Moving to Post-Pick");
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(post_pick_location)).setJointVelocityRel(0.05));
+            pick_tcp.move(ptp(getApplicationData().getFrame(post_pick_location)).setJointVelocityRel(0.01));
         } catch (Exception e) {
             System.out.println("Could not move to post-pick due to");
             System.out.println(e.getMessage());
@@ -203,7 +203,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		System.out.println("Executing Data Collection Sequence");
 		
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(start_lin_1)).setJointVelocityRel(0.05));
+            pick_tcp.move(ptp(getApplicationData().getFrame(start_lin_1)).setJointVelocityRel(0.01));
         } catch (Exception e) {
             System.out.println("Could not move to lin 1 due to");
             System.out.println(e.getMessage());
@@ -251,7 +251,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		}
 		
 		System.out.println("Executing Spline Motion, and Placing the Package");
-		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copyWithRedundancy();
+		Frame goal_location = pick_tcp.copy();
 		goal_location.setBetaRad(goal_location.getBetaRad()+CurrentGoalOrientation);
 		
 		if(CurrentJointRelAcc != 0){
