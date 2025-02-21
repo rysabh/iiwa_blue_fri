@@ -59,7 +59,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 	private ObjectFrame pick_tcp;
     private IUserKeyBar robot_control_bar;
     
-    private String[] GoalOrientation = {"0","30","60","90"};
+    private String[] GoalOrientation = {"0","30","45","60"};
     private String[] PackageType = {"1", "2", "3"};
     private String[] joint_rel_vel = {"0.1", "0.3", "0.5"};
     private String[] joint_rel_acc = {"0.0", "0.05", "0.1"};
