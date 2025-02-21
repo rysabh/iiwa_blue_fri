@@ -61,8 +61,8 @@ public class package_data_collection extends RoboticsAPIApplication {
     
     private String[] GoalOrientation = {"0","30","60","90"};
     private String[] PackageType = {"1", "2", "3"};
-    private String[] joint_rel_vel = {"0.1", "0.5", "0.9"};
-    private String[] joint_rel_acc = {"0.0", "0.5", "0.9"};
+    private String[] joint_rel_vel = {"0.1", "0.3", "0.5"};
+    private String[] joint_rel_acc = {"0.0", "0.05", "0.1"};
     
     
     private CartesianImpedanceControlMode impedanceControlmode;
@@ -72,7 +72,6 @@ public class package_data_collection extends RoboticsAPIApplication {
     private String home, pick_location, pre_pick_location, post_pick_location;
     
     private String start_lin_1, start_circ, mid_circ, start_lin_2, nominal_place_location;
-    private Frame place_location;
     
     private boolean exit_flag;
     
@@ -252,7 +251,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		
 		System.out.println("Executing Spline Motion, and Placing the Package");
 		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
-		goal_location.setBetaRad(goal_location.getBetaRad()+CurrentGoalOrientation);
+		goal_location.setBetaRad(goal_location.getBetaRad()-CurrentGoalOrientation);
 		
 		if(CurrentJointRelAcc != 0){
 			try {
