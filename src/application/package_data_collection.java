@@ -189,13 +189,53 @@ public class package_data_collection extends RoboticsAPIApplication {
             System.out.println(e.getMessage());
         }
 		
-		
 		return;
 	}
 	
 	private void beginDataCollection(){
 		
 		System.out.println("Executing Data Collection Sequence");
+		
+		try {
+            pick_tcp.move(ptp(getApplicationData().getFrame(start_lin_1)).setJointVelocityRel(0.1));
+        } catch (Exception e) {
+            System.out.println("Could not move to lin 1 due to");
+            System.out.println(e.getMessage());
+        }
+		DataRecorder recorder = initDataRecorder();
+		System.out.println("Executing Linear Motion");
+		try {
+            pick_tcp.move(lin(getApplicationData().getFrame(start_circ)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+        } catch (Exception e) {
+            System.out.println("Could not move to circ start due to");
+            System.out.println(e.getMessage());
+        }
+		
+		
+		System.out.println("Executing Circular Motion");
+		try {
+            pick_tcp.move(circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+        } catch (Exception e) {
+            System.out.println("Could not move to circ start due to");
+            System.out.println(e.getMessage());
+        }
+		
+		System.out.println("Executing Spline Motion, and Placing the Package");
+		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copyWithRedundancy();
+		goal_location.setBetaRad(goal_location.getBetaRad()+CurrentGoalOrientation);
+		
+		try {
+            pick_tcp.move(spl(goal_location).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+        } catch (Exception e) {
+            System.out.println("Could not move to circ start due to");
+            System.out.println(e.getMessage());
+        }
+		
+		recorder.stopRecording();
+        
+        if (recorder.awaitFileAvailable(5, TimeUnit.SECONDS)) {
+            System.out.println("File is available");
+        }
 		
 		
 		return;
