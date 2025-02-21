@@ -210,6 +210,7 @@ public class package_data_collection extends RoboticsAPIApplication {
             System.out.println(e.getMessage());
         }
 		DataRecorder recorder = initDataRecorder();
+		recorder.startRecording();
 		System.out.println("Executing Linear Motion");
 		
 		if(CurrentJointRelAcc != 0){
