@@ -61,7 +61,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 	private ObjectFrame pick_tcp;
     private IUserKeyBar robot_control_bar;
     
-    private String[] GoalOrientation = {"0","30","45","60"};
+    private String[] GoalOrientation = {"30","45","60"};
     private String[] PackageType = {"1", "2", "3"};
     private String[] joint_rel_vel = {"0.1", "0.3", "0.5"};
     private String[] joint_rel_acc = {"0.0", "0.05", "0.1"};
@@ -123,12 +123,13 @@ public class package_data_collection extends RoboticsAPIApplication {
 		CurrentJointRelVel = Double.valueOf(joint_rel_vel[id]);
 		System.out.println("Joint Relative Velocity set to: "+ String.valueOf(CurrentJointRelVel));
 		
-		id = getApplicationUI().displayModalDialog(
-				ApplicationDialogType.QUESTION, 
-				"Select the Joint Rel Acc for the current trial:", 
-				joint_rel_acc
-		);
-		CurrentJointRelAcc = Double.valueOf(joint_rel_acc[id]);
+//		id = getApplicationUI().displayModalDialog(
+//				ApplicationDialogType.QUESTION, 
+//				"Select the Joint Rel Acc for the current trial:", 
+//				joint_rel_acc
+//		);
+//		CurrentJointRelAcc = Double.valueOf(joint_rel_acc[id]);
+		CurrentJointRelAcc = 0.1;
 		System.out.println("Joint Relative Acceleration set to: "+ String.valueOf(CurrentJointRelAcc));
 		
 		
@@ -204,11 +205,20 @@ public class package_data_collection extends RoboticsAPIApplication {
 		System.out.println("Executing Data Collection Sequence");
 		
 		try {
-            pick_tcp.move(ptp(getApplicationData().getFrame(start_lin_1)).setJointVelocityRel(0.01));
+            pick_tcp.move(ptp(getApplicationData().getFrame(start_lin_1)).setJointVelocityRel(0.1));
         } catch (Exception e) {
             System.out.println("Could not move to lin 1 due to");
             System.out.println(e.getMessage());
         }
+		
+		getApplicationUI().displayModalDialog(
+				ApplicationDialogType.QUESTION, 
+				"Press Done Once Pick Is Completed", 
+				"Done"
+		);
+		
+		
+		
 		DataRecorder recorder = initDataRecorder();
 		recorder.startRecording();
 		System.out.println("Executing Linear Motion");
