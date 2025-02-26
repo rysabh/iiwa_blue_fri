@@ -131,7 +131,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 //				joint_rel_acc
 //		);
 //		CurrentJointRelAcc = Double.valueOf(joint_rel_acc[id]);
-		CurrentJointRelAcc = 0.1;
+		CurrentJointRelAcc = 0.5;
 		System.out.println("Joint Relative Acceleration set to: "+ String.valueOf(CurrentJointRelAcc));
 		
 		
@@ -228,7 +228,9 @@ public class package_data_collection extends RoboticsAPIApplication {
 		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
 		goal_location.setGammaRad(goal_location.getGammaRad()-CurrentGoalOrientation);
 		
-		Spline motion_traj = new Spline(lin(getApplicationData().getFrame(start_circ)),
+		Spline motion_traj = new Spline(
+				lin(getApplicationData().getFrame(start_lin_1)),
+				lin(getApplicationData().getFrame(start_circ)),
 				lin(getApplicationData().getFrame(start_circ)),
 				circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)),
 				spl(goal_location));
