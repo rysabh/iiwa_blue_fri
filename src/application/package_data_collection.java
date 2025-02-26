@@ -22,6 +22,8 @@ import com.kuka.roboticsAPI.geometricModel.World;
 import com.kuka.roboticsAPI.geometricModel.math.CoordinateAxis;
 import com.kuka.roboticsAPI.geometricModel.math.ITransformation;
 import com.kuka.roboticsAPI.geometricModel.math.Transformation;
+import com.kuka.roboticsAPI.motionModel.SPL;
+import com.kuka.roboticsAPI.motionModel.Spline;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.CartesianImpedanceControlMode;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder;
 import com.kuka.roboticsAPI.sensorModel.DataRecorder.AngleUnit;
@@ -222,68 +224,83 @@ public class package_data_collection extends RoboticsAPIApplication {
 		DataRecorder recorder = initDataRecorder();
 		recorder.startRecording();
 		System.out.println("Executing Linear Motion");
-		
-		if(CurrentJointRelAcc != 0){
-			try {
-	            pick_tcp.move(lin(getApplicationData().getFrame(start_circ)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-		}
-		else{
-			try {
-	            pick_tcp.move(lin(getApplicationData().getFrame(start_circ)).setJointVelocityRel(CurrentJointRelVel));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-		}
-		
-		
-		
-		System.out.println("Executing Circular Motion");
-		if(CurrentJointRelAcc !=0){
-			try {
-	            pick_tcp.move(circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-			
-		}
-		else{
-			try {
-	            pick_tcp.move(circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)).setJointVelocityRel(CurrentJointRelVel));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-			
-		}
-		
 		System.out.println("Executing Spline Motion, and Placing the Package");
 		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
 		goal_location.setGammaRad(goal_location.getGammaRad()-CurrentGoalOrientation);
 		
+		Spline motion_traj = new Spline(lin(getApplicationData().getFrame(start_circ)),
+				lin(getApplicationData().getFrame(start_circ)),
+				circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)),
+				spl(goal_location));
 		
-		if(CurrentJointRelAcc != 0){
-			try {
-	            pick_tcp.move(spl(goal_location).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-		}
-		else{
-			try {
-	            pick_tcp.move(spl(goal_location).setJointVelocityRel(CurrentJointRelVel));
-	        } catch (Exception e) {
-	            System.out.println("Could not move to circ start due to");
-	            System.out.println(e.getMessage());
-	        }
-		}
+		try {
+            pick_tcp.move(motion_traj.setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+        } catch (Exception e) {
+            System.out.println("Could not execute the trajectory due to");
+            System.out.println(e.getMessage());
+        }
 		
+//		if(CurrentJointRelAcc != 0){
+//			try {
+//	            pick_tcp.move(lin(getApplicationData().getFrame(start_circ)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//		}
+//		else{
+//			try {
+//	            pick_tcp.move(lin(getApplicationData().getFrame(start_circ)).setJointVelocityRel(CurrentJointRelVel));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//		}
+//		
+//		
+//		
+//		System.out.println("Executing Circular Motion");
+//		if(CurrentJointRelAcc !=0){
+//			try {
+//	            pick_tcp.move(circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//			
+//		}
+//		else{
+//			try {
+//	            pick_tcp.move(circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)).setJointVelocityRel(CurrentJointRelVel));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//			
+//		}
+//		
+//		System.out.println("Executing Spline Motion, and Placing the Package");
+//		Frame goal_location = getApplicationData().getFrame(nominal_place_location).copy();
+//		goal_location.setGammaRad(goal_location.getGammaRad()-CurrentGoalOrientation);
+//		
+//		
+//		if(CurrentJointRelAcc != 0){
+//			try {
+//	            pick_tcp.move(spl(goal_location).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//		}
+//		else{
+//			try {
+//	            pick_tcp.move(spl(goal_location).setJointVelocityRel(CurrentJointRelVel));
+//	        } catch (Exception e) {
+//	            System.out.println("Could not move to circ start due to");
+//	            System.out.println(e.getMessage());
+//	        }
+//		}
+//		
 		
 		recorder.stopRecording();
         
