@@ -231,7 +231,6 @@ public class package_data_collection extends RoboticsAPIApplication {
 		Spline motion_traj = new Spline(
 				lin(getApplicationData().getFrame(start_lin_1)),
 				lin(getApplicationData().getFrame(start_circ)),
-				lin(getApplicationData().getFrame(start_circ)),
 				circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)),
 				spl(goal_location));
 		
