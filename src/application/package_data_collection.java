@@ -264,7 +264,7 @@ public class package_data_collection extends RoboticsAPIApplication {
         }
 		
 		try {
-			pick_tcp.move(lin(getApplicationData().getFrame(home)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+			pick_tcp.move(spl(getApplicationData().getFrame(home)).setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
 	    } catch (Exception e) {
 	        System.out.println("Could not move to circ start due to");
 	        System.out.println(e.getMessage());
