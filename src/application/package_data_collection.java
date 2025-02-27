@@ -247,17 +247,17 @@ public class package_data_collection extends RoboticsAPIApplication {
 		Frame current_position = lBR_iiwa_7_R800_1.getCurrentCartesianPosition(lBR_iiwa_7_R800_1.getFlange());
 		
 		Frame swing_extreme_1 = current_position.copy();
-		swing_extreme_1.setBetaRad(swing_extreme_1.getBetaRad()-CurrentGoalOrientation);
+		swing_extreme_1.setGammaRad(swing_extreme_1.getGammaRad()-CurrentGoalOrientation);
 		
 		Frame swing_extreme_2 = current_position.copy();
-		swing_extreme_2.setBetaRad(swing_extreme_2.getBetaRad()+CurrentGoalOrientation);
+		swing_extreme_2.setGammaRad(swing_extreme_2.getGammaRad()+CurrentGoalOrientation);
 		Spline motion_traj_2 = new Spline(
-				spl(swing_extreme_1),
-				spl(current_position),
-				spl(swing_extreme_2));
+				lin(swing_extreme_1),
+				lin(current_position),
+				lin(swing_extreme_2));
 		
 		try {
-            pick_tcp.move(motion_traj_2.setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+            lBR_iiwa_7_R800_1.move(motion_traj_2.setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
         } catch (Exception e) {
             System.out.println("Could not execute the trajectory due to");
             System.out.println(e.getMessage());
