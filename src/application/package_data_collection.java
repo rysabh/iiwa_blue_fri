@@ -73,7 +73,7 @@ public class package_data_collection extends RoboticsAPIApplication {
     private double CurrentGoalOrientation = 0.0, CurrentJointRelVel = 0.1, CurrentJointRelAcc = 0.0;
     private int CurrentPackageType = 1;
     
-    private String home, pick_location, pre_pick_location, post_pick_location;
+    private String home, pick_location, pre_pick_location, post_pick_location, mid_circ_2;
     
     private String start_lin_1, start_circ, mid_circ, start_lin_2, nominal_place_location;
     
@@ -93,6 +93,7 @@ public class package_data_collection extends RoboticsAPIApplication {
 		start_circ = "/P5";
 		mid_circ = "/P6";
 		start_lin_2 = "/P7";
+		mid_circ_2 = "/P9";
 		nominal_place_location = "/P8";
 		
 		
@@ -232,10 +233,31 @@ public class package_data_collection extends RoboticsAPIApplication {
 				lin(getApplicationData().getFrame(start_lin_1)),
 				lin(getApplicationData().getFrame(start_circ)),
 				circ(getApplicationData().getFrame(mid_circ),getApplicationData().getFrame(start_lin_2)),
-				spl(goal_location));
+				circ(getApplicationData().getFrame(mid_circ_2),getApplicationData().getFrame(home)));
 		
 		try {
             pick_tcp.move(motion_traj.setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
+        } catch (Exception e) {
+            System.out.println("Could not execute the trajectory due to");
+            System.out.println(e.getMessage());
+        }
+		
+		
+		System.out.println("Executing Swing Motion");
+		Frame current_position = lBR_iiwa_7_R800_1.getCurrentCartesianPosition(lBR_iiwa_7_R800_1.getFlange());
+		
+		Frame swing_extreme_1 = current_position.copy();
+		swing_extreme_1.setBetaRad(swing_extreme_1.getBetaRad()-CurrentGoalOrientation);
+		
+		Frame swing_extreme_2 = current_position.copy();
+		swing_extreme_2.setBetaRad(swing_extreme_2.getBetaRad()+CurrentGoalOrientation);
+		Spline motion_traj_2 = new Spline(
+				spl(swing_extreme_1),
+				spl(current_position),
+				spl(swing_extreme_2));
+		
+		try {
+            pick_tcp.move(motion_traj_2.setJointVelocityRel(CurrentJointRelVel).setJointAccelerationRel(CurrentJointRelAcc));
         } catch (Exception e) {
             System.out.println("Could not execute the trajectory due to");
             System.out.println(e.getMessage());
