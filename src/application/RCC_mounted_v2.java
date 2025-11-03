@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import com.kuka.common.ThreadUtil;
 
 
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
@@ -134,6 +135,7 @@ public class RCC_mounted_v2 extends RoboticsAPIApplication {
                 System.out.println("Could not move to P2 due to");
                 System.out.println(e.getMessage());
             }
+            ThreadUtil.milliSleep(500);
         }
         
         recorder.stopRecording();
