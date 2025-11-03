@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigurationProject>
     <TopologyItem itemPath="com.kuka/Project" name="Project" selectedVersion="1" uniqueID="">
-        <TopologyItem itemPath="com.kuka/ControllerLBR5" name="KUKA_Sunrise_Cabinet_1" selectedVersion="1" uniqueID="e6355b96-4b0d-4cb3-b5d0-ffa175352e60">
-            <TopologyItem itemPath="com.kuka/LBR5_7kg" name="LBR_iiwa_7_R800_1" selectedVersion="2" uniqueID="39b5a819-74f1-4a87-a958-0210dc65a7c5">
+        <TopologyItem itemPath="com.kuka/ControllerLBR5" name="KUKA_Sunrise_Cabinet_1" selectedVersion="1" uniqueID="38d6740d-07bb-4e4c-80e8-41b4a729b181">
+            <TopologyItem itemPath="com.kuka/LBR5_7kg" name="LBR_iiwa_7_R800_1" selectedVersion="2" uniqueID="ba46317f-2a5c-46bd-9b7f-ce9f33aba687">
                 <Property displayName="userName" key="userName" type="String">
                     <Value>LBR_iiwa_7_R800_1</Value>
                 </Property>
@@ -82,9 +82,9 @@
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="LBR5 Config Template" installItem="true" installedVersion="1.1" itemPath="com.kuka/LBR5_Config_Template" selectedVersion="1.1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="LBRCompounds" installItem="true" installedVersion="1" itemPath="com.kuka/LBRCompounds" selectedVersion="1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="LBR example applications" installItem="false" installedVersion="NONE" itemPath="com.kuka/LBRExampleApplications" selectedVersion="NONE" usage="Feature"/>
-            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 14kg Kinematics" installItem="true" installedVersion="1" itemPath="com.kuka/Madas_LBR5_14kg_Kin" selectedVersion="NONE" usage="Library"/>
-            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 7kg Drives" installItem="true" installedVersion="NONE" itemPath="com.kuka/Madas_LBR5_7kg_CF" selectedVersion="1" usage="Library"/>
-            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 7kg Kinematics" installItem="true" installedVersion="NONE" itemPath="com.kuka/Madas_LBR5_7kg_Kin" selectedVersion="1" usage="Library"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 14kg Kinematics" installItem="true" installedVersion="NONE" itemPath="com.kuka/Madas_LBR5_14kg_Kin" selectedVersion="NONE" usage="Library"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 7kg Drives" installItem="true" installedVersion="1" itemPath="com.kuka/Madas_LBR5_7kg_CF" selectedVersion="1" usage="Library"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MADA LBR5 7kg Kinematics" installItem="true" installedVersion="1" itemPath="com.kuka/Madas_LBR5_7kg_Kin" selectedVersion="1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MediaFlangeIOConfig" installItem="true" installedVersion="1" itemPath="com.kuka/MediaFlangeIOConfig" selectedVersion="1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MotionCompounds" installItem="true" installedVersion="1" itemPath="com.kuka/MotionCompounds" selectedVersion="1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="MotionManager" installItem="true" installedVersion="1" itemPath="com.kuka/MotionManager" selectedVersion="1" usage="Library"/>
@@ -92,7 +92,7 @@
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="PDS-Firmware Update" installItem="true" installedVersion="1" itemPath="com.kuka/PdsFirmwareUpdate" selectedVersion="1" usage="Feature"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="PlatformAdapter" installItem="true" installedVersion="1" itemPath="com.kuka/PlatformAdapter" selectedVersion="1" usage="Library"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="PowerManagementService" installItem="true" installedVersion="1" itemPath="com.kuka/PowerManagementService" selectedVersion="1" usage="Library"/>
-            <SoftwareItem autoSelected="false" canChangeSelection="true" displayName="Robotics API" installItem="true" installedVersion="1.0.0" itemPath="com.kuka/RAPI" selectedVersion="1.0.0" usage="Feature"/>
+            <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="Robotics API" installItem="true" installedVersion="1.0.0" itemPath="com.kuka/RAPI" selectedVersion="1.0.0" usage="Feature"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="RAPI20" installItem="false" installedVersion="NONE" itemPath="com.kuka/RAPI20" selectedVersion="NONE" usage="Feature"/>
             <SoftwareItem autoSelected="true" canChangeSelection="false" displayName="RAPICommon" installItem="true" installedVersion="1.0.0" itemPath="com.kuka/RAPICommon" selectedVersion="1.0.0" usage="Feature"/>
             <SoftwareItem autoSelected="true" canChangeSelection="true" displayName="General safety settings" installItem="true" installedVersion="1" itemPath="com.kuka/SafetyBasic" selectedVersion="1" usage="Library"/>
