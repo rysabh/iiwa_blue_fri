@@ -28,7 +28,7 @@ import com.kuka.roboticsAPI.uiModel.userKeys.UserKeyEvent;
 
 public class RCC_mounted_v2 extends RoboticsAPIApplication {
     @Inject
-    private LBR lBR_iiwa_14_R820_1;
+    private LBR lBR_iiwa_7_R800_1;
     
     @Inject
 	@Named("BNC")  // Used for collecting SERL Demonstrations
@@ -44,7 +44,7 @@ public class RCC_mounted_v2 extends RoboticsAPIApplication {
     
     @Override
     public void initialize() {
-    	peg.attachTo(lBR_iiwa_14_R820_1.getFlange());
+    	peg.attachTo(lBR_iiwa_7_R800_1.getFlange());
         peg_tcp = peg.getFrame("/TCP");
         impedanceControlmode = new CartesianImpedanceControlMode();
         impedanceControlmode.parametrize(CartDOF.X,CartDOF.Y).setStiffness(100);
@@ -69,11 +69,11 @@ public class RCC_mounted_v2 extends RoboticsAPIApplication {
 
         DataRecorder recorder = new DataRecorder(fname, timeout, TimeUnit.SECONDS, sampleRate);
         
-        recorder.addCartesianForce(lBR_iiwa_14_R820_1.getFlange(), World.Current.getRootFrame())
-                .addCartesianTorque(lBR_iiwa_14_R820_1.getFlange(), World.Current.getRootFrame())
-                .addCurrentCartesianPositionXYZ(lBR_iiwa_14_R820_1.getFlange(), World.Current.getRootFrame())
-                .addCommandedCartesianPositionXYZ(lBR_iiwa_14_R820_1.getFlange(), World.Current.getRootFrame())
-                .addCurrentJointPosition(lBR_iiwa_14_R820_1, AngleUnit.Degree);
+        recorder.addCartesianForce(lBR_iiwa_7_R800_1.getFlange(), World.Current.getRootFrame())
+                .addCartesianTorque(lBR_iiwa_7_R800_1.getFlange(), World.Current.getRootFrame())
+                .addCurrentCartesianPositionXYZ(lBR_iiwa_7_R800_1.getFlange(), World.Current.getRootFrame())
+                .addCommandedCartesianPositionXYZ(lBR_iiwa_7_R800_1.getFlange(), World.Current.getRootFrame())
+                .addCurrentJointPosition(lBR_iiwa_7_R800_1, AngleUnit.Degree);
         recorder.enable();
         return recorder;
     }
@@ -90,7 +90,7 @@ public class RCC_mounted_v2 extends RoboticsAPIApplication {
 
     @Override
     public void run() {
-        peg.attachTo(lBR_iiwa_14_R820_1.getFlange());
+        peg.attachTo(lBR_iiwa_7_R800_1.getFlange());
         peg_tcp = peg.getFrame("/Peg_Tip");
 
         robot_control_bar = getApplicationUI().createUserKeyBar("Action Control Bar");
