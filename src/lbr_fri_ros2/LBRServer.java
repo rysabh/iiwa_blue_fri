@@ -6,9 +6,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.Arrays;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.kuka.roboticsAPI.applicationModel.RoboticsAPIApplication;
 import com.kuka.roboticsAPI.controllerModel.Controller;
 import com.kuka.roboticsAPI.deviceModel.LBR;
+import com.kuka.roboticsAPI.geometricModel.CartDOF;
+import com.kuka.roboticsAPI.geometricModel.Tool;
 import com.kuka.roboticsAPI.uiModel.ApplicationDialogType;
 import com.kuka.roboticsAPI.motionModel.controlModeModel.*;
 import com.kuka.connectivity.fastRobotInterface.*;
@@ -32,7 +37,7 @@ public class LBRServer extends RoboticsAPIApplication {
 
 	// FRI parameters 
 	private String client_name_;
-	private String[] client_names_ = {"192.168.10.150","192.168.10.151", "192.168.10.152", "192.170.10.121", "192.168.10.159"};
+	private String[] client_names_ = {"192.168.10.190","192.168.10.150", "192.168.10.152", "192.170.10.121", "192.168.10.159"};
 	private int send_period_;	
 	private String[] send_periods_ = {"1", "2", "5", "10"};  // send period in ms
 
@@ -44,6 +49,10 @@ public class LBRServer extends RoboticsAPIApplication {
 	private String[] control_modes_ = getNames(CONTROL_MODE.class);
 	private ClientCommandMode command_mode_;
 	private String[] command_modes_ = getNames(ClientCommandMode.class);
+	
+	@Inject
+	@Named("RectPegTwoCameras")
+	private Tool peg;
 	
 
 	// methods
@@ -82,7 +91,13 @@ public class LBRServer extends RoboticsAPIApplication {
 				control_mode_ = new JointImpedanceControlMode(200, 200, 200, 200, 200, 200, 200);
 				break;
 			case CARTESIAN_IMPEDANCE_CONTROL:
-				control_mode_ = new CartesianImpedanceControlMode();
+				CartesianImpedanceControlMode mode = new CartesianImpedanceControlMode();
+			    mode.parametrize(CartDOF.X).setStiffness(1000);
+			    mode.parametrize(CartDOF.Y).setStiffness(1000);
+			    mode.parametrize(CartDOF.Z).setStiffness(700);
+			    mode.parametrize(CartDOF.ROT).setStiffness(50);
+			    mode.parametrize(CartDOF.ALL).setDamping(0.7);
+			    control_mode_ = mode;
 				break;
 		}
 		getLogger().info("Control mode set to: " + control_mode.name());
@@ -100,7 +115,7 @@ public class LBRServer extends RoboticsAPIApplication {
 	public void configure_fri() {
 		fri_configuration_ = FRIConfiguration.createRemoteConfiguration(lbr_, client_name_);
 		fri_configuration_.setSendPeriodMilliSec(send_period_);
-		fri_configuration_.setPortOnRemote(30201);
+		fri_configuration_.setPortOnRemote(30200);
 		
         getLogger().info("Creating FRI connection to " + fri_configuration_.getHostName());
         getLogger().info(
@@ -140,6 +155,9 @@ public class LBRServer extends RoboticsAPIApplication {
 	public void initialize() {
         lbr_controller_ = (Controller) getContext().getControllers().toArray()[0];
         lbr_ = (LBR) lbr_controller_.getDevices().toArray()[0];
+        
+        //Initializing the Peg TCP
+		peg.attachTo(lbr_.getFlange());
 		
         // set FRI parameters
 		request_user_config();

@@ -6,52 +6,52 @@
 	<classpathentry kind="lib" path="KUKAJavaLib/javax.inject_1.0.0.v20091030.jar"/>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.common.datatypes_1.15.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.common.datatypes_1.15.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.common.datatypes_1.15.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.common.utilities_1.5.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.common.utilities_1.5.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.common.utilities_1.5.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.connectivity.fastRobotInterface_1.15.1.Con1-11-0_5.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.connectivity.fastRobotInterface_1.15.1.Con1-11-0_5-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.connectivity.fastRobotInterface_1.15.1.Con1-11-0_5-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.mastering.provider.api_1.5.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.resource.api_1.0.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.resource.api_1.0.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.resource.api_1.0.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.roboticsAPI_1.15.1.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.roboticsAPI_1.15.1.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.roboticsAPI_1.15.1.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.roboticsAPI.handGuiding_1.16.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.roboticsAPI.handGuiding_1.16.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.roboticsAPI.handGuiding_1.16.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.sunrise.common_1.0.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.sunrise.common_1.0.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.sunrise.common_1.0.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.task.api_1.0.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/com.kuka.task.api_1.0.0.10-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/com.kuka.task.api_1.0.0.10-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="KUKAJavaLib/com.kuka.jogging.provider.api_1.0.0.10.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_blue_fri/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/iiwa_122_fri/KUKAJavaLib/#Bundle-JavaDoc#!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
