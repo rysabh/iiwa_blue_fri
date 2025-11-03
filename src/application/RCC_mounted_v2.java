@@ -127,7 +127,9 @@ public class RCC_mounted_v2 extends RoboticsAPIApplication {
         
         while(recorder_active) {
             try {
-                peg_tcp.move(ptp(getApplicationData().getFrame("/P2")).setJointVelocityRel(0.01).setMode(impedanceControlmode));
+//                peg_tcp.move(ptp(getApplicationData().getFrame("/P2")).setJointVelocityRel(0.01).setMode(impedanceControlmode));
+                ptp(getApplicationData().getFrame("/P2"));
+
             } catch (Exception e) {
                 System.out.println("Could not move to P2 due to");
                 System.out.println(e.getMessage());
